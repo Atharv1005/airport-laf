@@ -1,0 +1,33 @@
+{
+  "name": "airport-laf-client",
+  "version": "1.0.0",
+  "description": "Airport Lost & Found Management System - Frontend",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "cap:sync": "npx cap sync",
+    "cap:open": "npx cap open android",
+    "cap:run": "npx cap run android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^5.7.0",
+    "@capacitor/camera": "^5.0.9",
+    "@capacitor/core": "^5.7.0",
+    "axios": "^1.6.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^5.7.0",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
+    "vite": "^5.0.11"
+  }
+}

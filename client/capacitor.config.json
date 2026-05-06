@@ -1,0 +1,23 @@
+{
+  "appId": "com.airport.lostfound",
+  "appName": "Airport L&F",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": false
+  },
+  "plugins": {
+    "Camera": {
+      "permissions": ["camera", "photos"]
+    },
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "backgroundColor": "#0A0E1A",
+      "showSpinner": false
+    }
+  }
+}

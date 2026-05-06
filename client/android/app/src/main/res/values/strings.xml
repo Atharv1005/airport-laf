@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Airport L&amp;F</string>
+    <string name="title_activity_main">Airport L&amp;F</string>
+    <string name="package_name">com.airport.lostfound</string>
+    <string name="custom_url_scheme">com.airport.lostfound</string>
+</resources>
