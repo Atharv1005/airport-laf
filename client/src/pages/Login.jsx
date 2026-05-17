@@ -72,7 +72,7 @@ export default function Login() {
           <img
             src={logo}
             alt="logo"
-            style={{ width: 36, height: 36, objectFit: 'contain', filter: YELLOW_FILTER }}
+            style={{ width: 90, height: 90, objectFit: 'contain', filter: 'none' }}
           />
           <h1 style={{
             fontSize: 30, fontWeight: 800, color: '#fff',

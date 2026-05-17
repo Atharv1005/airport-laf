@@ -22,9 +22,22 @@ const STATUSES = ['ACTIVE', 'CLAIMED', 'EXPIRED', 'DISPOSED'];
 async function generateItemId() {
   const year = new Date().getFullYear();
   const Item = mongoose.model('Item');
-  const count = await Item.countDocuments({ itemId: new RegExp(`^PNQ-LF-${year}`) });
-  const seq = String(count + 1).padStart(4, '0');
-  return `AXU-LF-${year}-${seq}`;
+
+  // Find the highest existing sequence number for this year
+  const last = await Item.findOne(
+    { itemId: new RegExp(`^AXU-LF-${year}-`) },
+    { itemId: 1 },
+    { sort: { itemId: -1 } }
+  );
+
+  let nextSeq = 1;
+  if (last) {
+    const parts = last.itemId.split('-');
+    const lastSeq = parseInt(parts[3], 10);
+    nextSeq = lastSeq + 1;
+  }
+
+  return `AXU-LF-${year}-${String(nextSeq).padStart(4, '0')}`;
 }
 
 const itemSchema = new mongoose.Schema(
@@ -87,9 +100,20 @@ const itemSchema = new mongoose.Schema(
 );
 
 // Auto-generate itemId and expiryDate before save
+// Replace the existing pre save hook with this
 itemSchema.pre('save', async function (next) {
   if (!this.itemId) {
-    this.itemId = await generateItemId();
+    let generated = false;
+    let attempts = 0;
+    while (!generated && attempts < 5) {
+      try {
+        this.itemId = await generateItemId();
+        generated = true;
+      } catch (err) {
+        attempts++;
+        if (attempts >= 5) return next(err);
+      }
+    }
   }
   if (!this.expiryDate) {
     const expiry = new Date(this.createdAt || Date.now());
